@@ -1,14 +1,14 @@
 defmodule KanbanWeb.Router do
   use KanbanWeb, :router
 
-  # pipeline :browser do
-  #   plug :accepts, ["html"]
-  #   plug :fetch_session
-  #   plug :fetch_live_flash
-  #   plug :put_root_layout, html: {KanbanWeb.Layouts, :root}
-  #   plug :protect_from_forgery
-  #   plug :put_secure_browser_headers
-  # end
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {KanbanWeb.Layouts, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
 
   pipeline :graphql do
     plug :accepts, ["json"]
@@ -36,6 +36,13 @@ defmodule KanbanWeb.Router do
   #     forward "/mailbox", Plug.Swoosh.MailboxPreview
   #   end
   # end
+
+  scope "/uploads", KanbanWeb do
+    pipe_through :browser
+  end
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: KanbanWeb.Schema
 
   forward "/api", Absinthe.Plug, schema: KanbanWeb.Schema
 end
