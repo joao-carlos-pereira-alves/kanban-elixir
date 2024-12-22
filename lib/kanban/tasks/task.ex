@@ -3,13 +3,15 @@ defmodule Kanban.Tasks.Task do
   use Waffle.Ecto.Schema
   import Ecto.Changeset
 
-  @required_params_create [:name, :execution_date, :execution_location, :priority, :description, :attachments, :files]
+  @required_params_create [:name, :execution_date, :status, :execution_location, :priority, :description, :attachments, :files]
   @priorities [:low, :high, :critical]
   @execution_locations [:remote, :office, :client_site, :hybrid]
+  @statuses [:to_do, :in_progress, :finished]
 
   schema "tasks" do
     field :name, :string
     field :priority, Ecto.Enum, values: @priorities
+    field :status, Ecto.Enum, values: @statuses
     field :description, :string
     field :execution_date, :date
     field :execution_location, Ecto.Enum, values: @execution_locations
@@ -34,6 +36,7 @@ defmodule Kanban.Tasks.Task do
     |> validate_length(:description, min: 3)
     |> validate_inclusion(:priority, @priorities)
     |> validate_inclusion(:execution_location, @execution_locations)
+    |> validate_inclusion(:status, @statuses)
     # |> validate_length(:description, max: 255)
   end
 end

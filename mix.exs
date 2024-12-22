@@ -19,7 +19,7 @@ defmodule Kanban.MixProject do
   def application do
     [
       mod: {Kanban.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :corsica]
     ]
   end
 
@@ -61,7 +61,8 @@ defmodule Kanban.MixProject do
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       {:waffle, "~> 1.1"},
-      {:waffle_ecto, "~> 0.0.11"}
+      {:waffle_ecto, "~> 0.0.11"},
+      {:corsica, "~> 1.0"}
     ]
   end
 

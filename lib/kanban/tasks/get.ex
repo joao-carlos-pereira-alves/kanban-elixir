@@ -5,9 +5,9 @@ defmodule Kanban.Tasks.Get do
   alias Kanban.Repo
 
   def list_tasks(params \\ %{}) do
-    query  = apply_filters(params)
+    query = apply_filters(params)
     offset = count_items(query)
-    query  = paginate(query, params)
+    query = paginate(query, params)
 
     case Repo.all(query) do
       [] -> {:error, :not_found}
@@ -33,28 +33,19 @@ defmodule Kanban.Tasks.Get do
   defp apply_execution_date_filter(query, execution_date) do
     case Date.from_iso8601(execution_date) do
       {:ok, date} -> where(query, [t], t.execution_date == ^date)
-      _error -> query  # Se o formato da data for inválido, não aplica o filtro
+      # Se o formato da data for inválido, não aplica o filtro
+      _error -> query
     end
   end
 
-  defp apply_search_description_filter(query, description) do
-    where(query, [t], ilike(t.description, ^"%#{description}%") or ilike(t.description, ^"%#{description}%"))
+
+  def apply_search_text_filter(query, search_text) do
+    where(
+      query,
+      [t],
+      ilike(t.name, ^"%#{search_text}%") or ilike(t.description, ^"%#{search_text}%")
+    )
   end
-
-  defp apply_search_name_filter(query, name) do
-    where(query, [t], ilike(t.name, ^"%#{name}%") or ilike(t.name, ^"%#{name}%"))
-  end
-
-  # defp apply_order(query, order_filter) do
-  #   order_expressions =
-  #     case order_filter do
-  #       nil -> [desc: :inserted_at]
-  #       "inserted_at_asc"  -> [asc: :inserted_at]
-  #       "inserted_at_desc" -> [desc: :inserted_at]
-  #     end
-
-  #   order_by(query, ^order_expressions)
-  # end
 
   defp apply_filters(params) do
     query = from(t in Task)
@@ -81,20 +72,11 @@ defmodule Kanban.Tasks.Get do
       end
 
     query =
-      case Map.fetch(params, "description") do
+      case Map.fetch(params, "search_text") do
         {:ok, nil} -> query
-        {:ok, description} -> apply_search_description_filter(query, description)
+        {:ok, search_text} -> apply_search_text_filter(query, search_text)
         :error -> query
       end
-
-    query =
-      case Map.fetch(params, "name") do
-        {:ok, nil} -> query
-        {:ok, name} -> apply_search_name_filter(query, name)
-        :error -> query
-      end
-
-    # query = apply_order(query, Map.get(params, "order_by"))
 
     query
   end
