@@ -37,6 +37,5 @@ defmodule Kanban.Tasks.Task do
     |> validate_inclusion(:priority, @priorities)
     |> validate_inclusion(:execution_location, @execution_locations)
     |> validate_inclusion(:status, @statuses)
-    # |> validate_length(:description, max: 255)
   end
 end
