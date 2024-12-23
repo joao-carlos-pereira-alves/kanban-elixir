@@ -1,6 +1,6 @@
 # Kanban API com Elixir
 
-Este projeto consiste em uma API de um sistema Kanban desenvolvido com **Elixir**, utilizando o framework **Phoenix**, **GraphQL** (via Absinthe) e **PostgreSQL** (gerenciado com Ecto). O sistema permite criar, listar, atualizar e remover tarefas (“tasks”), oferecendo funcionalidades como paginação, filtros por texto e anexação de arquivos.
+Este projeto consiste em uma API de um sistema Kanban desenvolvido com **Elixir**, utilizando o framework **Phoenix**, **GraphQL** (via Absinthe) e **PostgreSQL** (gerenciado com Ecto). O sistema permite listar tarefas (“tasks”), oferecendo funcionalidades como paginação, filtros por texto e anexação de arquivos.
 
 ## Decisões Técnicas
 
