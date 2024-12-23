@@ -163,8 +163,8 @@ query Task {
 1. Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
-cd <NOME_DO_REPOSITORIO>
+git clone [<URL_DO_REPOSITORIO>](https://github.com/joao-carlos-pereira-alves/kanban-elixir)
+cd kanban-elixir
 ```
 
 2. Instale as dependências:
