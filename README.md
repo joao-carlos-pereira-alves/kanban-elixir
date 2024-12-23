@@ -163,7 +163,7 @@ query Task {
 1. Clone o repositório:
 
 ```bash
-git clone [<URL_DO_REPOSITORIO>](https://github.com/joao-carlos-pereira-alves/kanban-elixir)
+git clone https://github.com/joao-carlos-pereira-alves/kanban-elixir
 cd kanban-elixir
 ```
 
