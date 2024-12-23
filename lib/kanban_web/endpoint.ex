@@ -2,7 +2,7 @@ defmodule KanbanWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :kanban
 
   plug Corsica,
-    origins: ["http://localhost:3000"],
+    origins: ["http://localhost:3000", "https://kanban-lingering-mountain-877.fly.dev/", "https://kanban-react-psi.vercel.app", "https://kanban-react-kl91utd4f-joaocarlopas-projects.vercel.app"],
     log: [rejected: :error, invalid: :warn, accepted: :debug],
     allow_headers: ["content-type", "authorization"],
     allow_credentials: true
