@@ -42,7 +42,8 @@ defmodule KanbanWeb.Router do
   end
 
   forward "/graphiql", Absinthe.Plug.GraphiQL,
-    schema: KanbanWeb.Schema
+    schema: KanbanWeb.Schema,
+    interface: :simple
 
   forward "/api", Absinthe.Plug, schema: KanbanWeb.Schema
 end
