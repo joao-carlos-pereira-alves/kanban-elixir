@@ -183,6 +183,7 @@ docker-compose -f docker-compose.dev.yml up --build
 
 ```bash
 mix ecto.setup
+mix run priv/repo/seeds.exs
 ```
 
 5. Inicie o servidor Phoenix:
