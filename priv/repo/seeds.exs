@@ -14,12 +14,19 @@
 alias Kanban.Repo
 alias Kanban.Tasks.Task
 
-file_path = "./example_file.jpeg"
+image_file_path = "./example_file.jpeg"
+pdf_file_path = "./example_pdf.pdf"
 
-file = %Plug.Upload{
-  filename: "example_file.jpeg",
-  path: file_path
+image_file = %Plug.Upload{
+  filename: "example_image.jpeg",
+  path: image_file_path
 }
+
+pdf_file = %Plug.Upload{
+  filename: "example_pdf.pdf",
+  path: pdf_file_path
+}
+
 
 tasks = [
   %{
@@ -30,7 +37,7 @@ tasks = [
     execution_location: "remote",
     status: "to_do",
     attachments: ["https://example.com/jwt_doc.pdf"],
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Configurar banco de dados",
@@ -40,7 +47,7 @@ tasks = [
     execution_location: "remote",
     status: "to_do",
     attachments: ["https://example.com/db_config.png"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Implementar GraphQL",
@@ -50,7 +57,7 @@ tasks = [
     execution_location: "remote",
     status: "in_progress",
     attachments: ["https://example.com/graphql_schema.json"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Refatorar código",
@@ -60,7 +67,7 @@ tasks = [
     execution_location: "office",
     status: "in_progress",
     attachments: [],
-    files: file
+    files: [pdf_file]
   },
   %{
     name: "Criar testes unitários",
@@ -70,7 +77,7 @@ tasks = [
     execution_location: "office",
     status: "to_do",
     attachments: ["https://example.com/test_coverage.pdf"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Criar documentação da API",
@@ -80,7 +87,7 @@ tasks = [
     execution_location: "office",
     attachments: ["https://example.com/swagger_doc.yaml"],
     status: "finished",
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Implementar cache",
@@ -90,7 +97,7 @@ tasks = [
     execution_location: "office",
     attachments: ["https://example.com/redis_tutorial.pdf"],
     status: "in_progress",
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Configurar CI/CD",
@@ -100,7 +107,7 @@ tasks = [
     execution_location: "client_site",
     status: "to_do",
     attachments: ["https://example.com/cicd_pipeline.png"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Criar notificações por e-mail",
@@ -110,7 +117,7 @@ tasks = [
     execution_location: "client_site",
     status: "to_do",
     attachments: [],
-    files: file
+    files: [pdf_file]
   },
   %{
     name: "Monitorar logs do sistema",
@@ -120,7 +127,7 @@ tasks = [
     execution_location: "hybrid",
     status: "to_do",
     attachments: ["https://example.com/elk_setup.png"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Criar painel administrativo",
@@ -130,7 +137,7 @@ tasks = [
     execution_location: "hybrid",
     status: "finished",
     attachments: ["https://example.com/admin_ui_mockup.png"],
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Analisar requisitos de segurança",
@@ -140,7 +147,7 @@ tasks = [
     execution_location: "hybrid",
     status: "to_do",
     attachments: [],
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Otimizar consultas SQL",
@@ -150,7 +157,7 @@ tasks = [
     execution_location: "remote",
     status: "to_do",
     attachments: ["https://example.com/sql_optimization.pdf"],
-    files: file
+    files: [image_file]
   },
   %{
     name: "Realizar testes de carga",
@@ -160,7 +167,7 @@ tasks = [
     execution_location: "client_site",
     status: "to_do",
     attachments: ["https://example.com/load_test_results.png"],
-    files: file
+    files: [image_file, pdf_file]
   },
   %{
     name: "Criar sistema de tags",
@@ -170,7 +177,7 @@ tasks = [
     execution_location: "client_site",
     status: "finished",
     attachments: ["https://example.com/tagging_system.png"],
-    files: file
+    files: [image_file, pdf_file]
   }
 ]
 

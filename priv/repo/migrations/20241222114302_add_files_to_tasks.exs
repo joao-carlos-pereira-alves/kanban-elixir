@@ -3,7 +3,7 @@ defmodule Kanban.Repo.Migrations.AddFilesToTasks do
 
   def change do
     alter table(:tasks) do
-      add :files, :string
+      add :files, {:array, :string}
     end
   end
 end

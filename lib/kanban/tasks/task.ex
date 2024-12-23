@@ -16,7 +16,7 @@ defmodule Kanban.Tasks.Task do
     field :execution_date, :date
     field :execution_location, Ecto.Enum, values: @execution_locations
     field :attachments, {:array, :string}, default: []
-    field :files, Kanban.Task.Type
+    field :files, {:array, Kanban.Task.Type}
 
     timestamps(type: :utc_datetime)
   end

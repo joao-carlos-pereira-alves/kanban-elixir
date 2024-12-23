@@ -22,10 +22,12 @@ defmodule KanbanWeb.Resolvers.TaskResolver do
                 nil ->
                   nil
 
-                %{} = file_map ->
-                  file_url = Kanban.Task.url({file_map, task})
-                  filename = Map.get(file_map, :file_name, "name_not_found")
-                  %{url: file_url, filename: filename}
+                files when is_list(files) ->
+                  Enum.map(files, fn file_map ->
+                    file_url = Kanban.Task.url({file_map, task})
+                    filename = Map.get(file_map, :file_name, "name_not_found")
+                    %{url: file_url, filename: filename}
+                  end)
 
                 _ ->
                   nil
@@ -41,7 +43,7 @@ defmodule KanbanWeb.Resolvers.TaskResolver do
         page = 1
         page_size = 5
 
-        {:ok, %{tasks: [], pagination: %{ page: page, total_items: 1, per_page: page_size }}}
+        {:ok, %{tasks: [], pagination: %{page: page, total_items: 1, per_page: page_size}}}
     end
   end
 
@@ -56,10 +58,15 @@ defmodule KanbanWeb.Resolvers.TaskResolver do
             nil ->
               Map.put(task, :files, nil)
 
-            %{} = file_map ->
-              file_url = Kanban.Task.url({file_map, task})
-              filename = Map.get(file_map, :file_name, "name_not_found")
-              Map.put(task, :files, %{url: file_url, filename: filename})
+            files when is_list(files) ->
+              updated_files =
+                Enum.map(files, fn file_map ->
+                  file_url = Kanban.Task.url({file_map, task})
+                  filename = Map.get(file_map, :file_name, "name_not_found")
+                  %{url: file_url, filename: filename}
+                end)
+
+              Map.put(task, :files, updated_files)
 
             _ ->
               Map.put(task, :files, nil)
